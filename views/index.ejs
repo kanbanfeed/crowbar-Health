@@ -1,377 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crowbar Health - Healthcare that understands you</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            200: '#a7f3d0',
-                            300: '#6ee7b7',
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
-                        },
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        }
-    </script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            overflow-x: hidden;
-        }
+<%- include('partials/head') %>
 
-        /* Animated Gradient Background */
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 25%, #d1fae5 50%, #a7f3d0 75%, #6ee7b7 100%);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            position: relative;
-        }
-
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        /* Floating Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        /* Fade In Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        /* Slide In Animation */
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .slide-in-left {
-            animation: slideInLeft 1s ease-out forwards;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .slide-in-right {
-            animation: slideInRight 1s ease-out forwards;
-        }
-
-        /* Pulse Glow */
-        @keyframes pulseGlow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(5, 150, 105, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(5, 150, 105, 0.6);
-            }
-        }
-
-        .pulse-glow {
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-
-        /* Count Up Animation */
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(20px) scale(0.8); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        .count-animate {
-            animation: countUp 0.6s ease-out;
-        }
-
-        /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .glass-strong {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Particle Background */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(5, 150, 105, 0.3);
-            border-radius: 50%;
-            animation: float 15s infinite;
-        }
-
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hover Scale */
-        .hover-scale {
-            transition: transform 0.3s ease;
-        }
-
-        .hover-scale:hover {
-            transform: scale(1.05);
-        }
-
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, #059669, #34d399, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Shimmer Effect */
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            background-size: 1000px 100%;
-            animation: shimmer 3s infinite;
-        }
-
-        /* Heartbeat Animation */
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.05); }
-        }
-
-        .heartbeat {
-            animation: heartbeat 2s ease-in-out infinite;
-        }
-
-        /* Rolling Bubbles Animation */
-        @keyframes bubbleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px) scale(1);
-                opacity: 0;
-            }
-        }
-
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(5, 150, 105, 0.4), rgba(20, 184, 166, 0.3));
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(5, 150, 105, 0.2);
-            animation: bubbleFloat 20s infinite;
-            pointer-events: none;
-            box-shadow: 0 8px 32px rgba(5, 150, 105, 0.2);
-        }
-
-        /* Card Hover Effects */
-        @keyframes cardGlow {
-            0%, 100% {
-                box-shadow: 0 10px 30px rgba(5, 150, 105, 0.1);
-            }
-            50% {
-                box-shadow: 0 20px 60px rgba(5, 150, 105, 0.3);
-            }
-        }
-
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(5, 150, 105, 0.25);
-        }
-
-        .card-hover:hover::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(20, 184, 166, 0.1));
-            border-radius: inherit;
-            z-index: -1;
-            animation: cardGlow 2s ease-in-out infinite;
-        }
-
-        /* 3D Card Effect */
-        .card-3d {
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-
-        .card-3d:hover {
-            transform: rotateY(5deg) rotateX(-5deg) translateZ(20px);
-        }
-    </style>
-</head>
 <body class="font-sans antialiased text-slate-800">
-    <!-- Navigation -->
-    <nav class="glass-strong sticky top-0 z-50 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center space-x-3">
-                    <!-- Beautiful Logo -->
-                    <div class="relative">
-                        <div class="w-14 h-14 bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform">
-                            <svg class="w-9 h-9 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Medical Cross Design -->
-                                <rect x="10" y="4" width="4" height="16" rx="2" fill="currentColor"/>
-                                <rect x="4" y="10" width="16" height="4" rx="2" fill="currentColor"/>
-                                <!-- Heart Pulse -->
-                                <path d="M12 18L9 15L6 18L3 15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
-                                <circle cx="12" cy="8" r="1.5" fill="white" opacity="0.9"/>
-                            </svg>
-                        </div>
-                        <div class="absolute -top-1 -right-1 w-5 h-5 bg-emerald-400 rounded-full animate-pulse border-2 border-white"></div>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold text-slate-800">Crowbar Health</h1>
-                        <p class="text-xs text-slate-500 -mt-1 font-medium">Healthcare Platform</p>
-                    </div>
-                </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="text-slate-700 hover:text-emerald-600 transition-all font-medium relative group">
-                        Home
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#services" class="text-slate-700 hover:text-emerald-600 transition-all font-medium relative group">
-                        Services
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#stats" class="text-slate-700 hover:text-emerald-600 transition-all font-medium relative group">
-                        Stats
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#doctors" class="text-slate-700 hover:text-emerald-600 transition-all font-medium relative group">
-                        Doctors
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#contact" class="text-slate-700 hover:text-emerald-600 transition-all font-medium relative group">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                </div>
-                <button class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 shadow-lg font-semibold flex items-center space-x-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                    </svg>
-                    <span>Login with Crowbar</span>
-                </button>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
+    <%- include('partials/navbar') %>
+
     <section id="home" class="relative min-h-screen flex items-center py-20 px-4 sm:px-6 lg:px-8 gradient-bg overflow-hidden">
         <div class="particles" id="particles"></div>
-        <!-- Rolling Bubbles Background -->
         <div id="bubbles-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
         <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Left: Bold Text -->
                 <div class="space-y-8 slide-in-left">
                     <div class="inline-block">
                         <span class="bg-emerald-500/20 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm border border-emerald-400/30">
@@ -385,14 +24,14 @@
                         Experience personalized healthcare with cutting-edge technology, compassionate care, and seamless access to medical services. Your health journey, simplified.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="group bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-emerald-600 hover:to-teal-600 transition-all transform hover:scale-105 shadow-2xl pulse-glow">
+                        <a href="/doctors" class="group bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-emerald-600 hover:to-teal-600 transition-all transform hover:scale-105 shadow-2xl pulse-glow flex items-center justify-center">
                             <span class="flex items-center justify-center">
                                 Get Started
                                 <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                                 </svg>
                             </span>
-                        </button>
+                        </a>
                         <button class="bg-white/90 backdrop-blur-md text-emerald-600 px-8 py-4 rounded-xl text-lg font-semibold border-2 border-emerald-600/30 hover:bg-white transition-all transform hover:scale-105 shadow-lg">
                             Learn More
                         </button>
@@ -413,7 +52,6 @@
                     </div>
                 </div>
 
-                <!-- Right: Floating 3D Card with Heart Rate Graph -->
                 <div class="flex justify-center slide-in-right">
                     <div class="glass-strong rounded-3xl p-8 shadow-2xl float-animation w-full max-w-md hover-scale">
                         <div class="flex items-center justify-between mb-6">
@@ -421,7 +59,6 @@
                             <div class="w-3 h-3 bg-emerald-500 rounded-full heartbeat"></div>
                         </div>
                         
-                        <!-- Heart Rate Graph -->
                         <div class="mb-6 bg-gradient-to-br from-slate-50 to-emerald-50 rounded-2xl p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <span class="text-slate-600 font-medium flex items-center">
@@ -450,7 +87,6 @@
                             </svg>
                         </div>
 
-                        <!-- Stats Row -->
                         <div class="grid grid-cols-2 gap-4 mb-6">
                             <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200">
                                 <p class="text-xs text-slate-600 mb-1">Blood Pressure</p>
@@ -464,20 +100,18 @@
                             </div>
                         </div>
 
-                        <!-- Book Appointment Button -->
-                        <button class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center">
+                        <a href="/doctors" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                             Book Appointment
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Health Stats Section -->
     <section id="stats" class="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
         <div class="absolute inset-0 opacity-5">
             <div class="absolute top-0 left-0 w-96 h-96 bg-emerald-500 rounded-full blur-3xl"></div>
@@ -547,7 +181,6 @@
         </div>
     </section>
 
-    <!-- Feature Grid: Care Cards -->
     <section id="services" class="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
         <div class="absolute inset-0 opacity-5">
             <div class="absolute top-20 right-10 w-72 h-72 bg-emerald-400 rounded-full blur-3xl"></div>
@@ -560,7 +193,6 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Telemed Card -->
                 <div class="group glass-strong rounded-3xl p-8 border-2 border-transparent hover:border-emerald-500 card-hover card-3d relative overflow-hidden shadow-xl cursor-pointer reveal">
                     <div class="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform shadow-lg">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -571,7 +203,7 @@
                     <p class="text-slate-600 leading-relaxed mb-6">
                         Connect with licensed healthcare providers from the comfort of your home. Secure video consultations available 24/7 with instant access to medical expertise.
                     </p>
-                    <a href="#" class="text-emerald-600 font-semibold hover:text-emerald-700 inline-flex items-center group-hover:translate-x-2 transition-transform">
+                    <a href="/telemed" class="text-emerald-600 font-semibold hover:text-emerald-700 inline-flex items-center group-hover:translate-x-2 transition-transform">
                         Learn More
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -579,7 +211,6 @@
                     </a>
                 </div>
 
-                <!-- Pharmacy Card -->
                 <div class="group glass-strong rounded-3xl p-8 border-2 border-transparent hover:border-emerald-500 card-hover card-3d relative overflow-hidden shadow-xl cursor-pointer reveal">
                     <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform shadow-lg">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -590,7 +221,7 @@
                     <p class="text-slate-600 leading-relaxed mb-6">
                         Fast, reliable prescription delivery. Order medications online and have them delivered to your doorstep within hours. Automated refills available.
                     </p>
-                    <a href="#" class="text-emerald-600 font-semibold hover:text-emerald-700 inline-flex items-center group-hover:translate-x-2 transition-transform">
+                    <a href="/pharmacy" class="text-emerald-600 font-semibold hover:text-emerald-700 inline-flex items-center group-hover:translate-x-2 transition-transform">
                         Learn More
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -598,7 +229,6 @@
                     </a>
                 </div>
 
-                <!-- Diagnostics Card -->
                 <div class="group glass-strong rounded-3xl p-8 border-2 border-transparent hover:border-emerald-500 card-hover card-3d relative overflow-hidden shadow-xl cursor-pointer reveal">
                     <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform shadow-lg">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -620,7 +250,6 @@
         </div>
     </section>
 
-    <!-- Doctors Section -->
     <section id="doctors" class="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-0 left-0 w-96 h-96 bg-emerald-500 rounded-full blur-3xl"></div>
@@ -672,7 +301,6 @@
         </div>
     </section>
 
-    <!-- Health Tips Section -->
     <section class="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-slate-50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16 reveal">
@@ -720,42 +348,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact" class="relative bg-[#0a1929] text-white py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <!-- Left Side: Brand Name and Tagline -->
-                <div class="flex-1">
-                    <div class="flex items-center space-x-3 mb-2">
-                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg">
-                            <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Medical Cross Design -->
-                                <rect x="10" y="4" width="4" height="16" rx="2" fill="currentColor"/>
-                                <rect x="4" y="10" width="16" height="4" rx="2" fill="currentColor"/>
-                                <!-- Heart Pulse -->
-                                <path d="M12 18L9 15L6 18L3 15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
-                                <circle cx="12" cy="8" r="1.5" fill="white" opacity="0.9"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-3xl font-bold text-white">Crowbar Health</h3>
-                            <p class="text-slate-400 text-sm mt-1">Smart healthcare, transparent care.</p>
-                        </div>
-                    </div>
-                </div>
+    <%- include('partials/footer') %>
 
-                <!-- Right Side: Network Badge and Copyright -->
-                <div class="flex flex-col items-end md:items-end gap-3">
-                    <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-2 rounded-lg font-bold text-sm md:text-base shadow-lg transform hover:scale-105 transition-transform">
-                        Part of the Crowbar Connected Network
-                    </div>
-                    <p class="text-slate-400 text-sm">© 2025 Crowbar Health. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
+    <script src="/app.js"></script>
 </body>
 </html>
-
