@@ -44,14 +44,52 @@ app.get('/doctors', (req, res) => {
 
 
 // 4. Pharmacy Page (E-Commerce)
+// 4. Pharmacy Page (Updated with working images)
 app.get('/pharmacy', (req, res) => {
     const products = [
-        { id: 1, name: "Immunity Booster Pack", price: "$29.99", category: "Wellness", color: "bg-orange-100" },
-        { id: 2, name: "Advanced First Aid Kit", price: "$45.50", category: "Essentials", color: "bg-red-100" },
-        { id: 3, name: "Digital Thermometer", price: "$12.99", category: "Devices", color: "bg-blue-100" },
-        { id: 4, name: "Daily Multivitamins", price: "$18.00", category: "Wellness", color: "bg-green-100" },
-        { id: 5, name: "BP Monitor Pro", price: "$89.99", category: "Devices", color: "bg-slate-100" },
-        { id: 6, name: "Organic Protein", price: "$34.50", category: "Nutrition", color: "bg-yellow-100" }
+        { 
+            id: 1, 
+            name: "Immunity Booster Pack", 
+            price: "$29.99", 
+            category: "Wellness", 
+image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=500&q=80"
+        },
+        { 
+            id: 2, 
+            name: "First Aid Kit Pro", 
+            price: "$45.50", 
+            category: "Essentials", 
+            image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=500&q=80" 
+        },
+        { 
+            id: 3, 
+            name: "Digital Thermometer", 
+            price: "$12.99", 
+            category: "Devices", 
+image: "/images/thermometer.png"        
+},
+
+        { 
+            id: 4, 
+            name: "Daily Multivitamins", 
+            price: "$18.00", 
+            category: "Wellness", 
+            image: "/images/multi.png" 
+        },
+        { 
+            id: 5, 
+            name: "BP Monitor", 
+            price: "$89.99", 
+            category: "Devices", 
+            image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?auto=format&fit=crop&w=500&q=80" 
+        },
+        { 
+            id: 6, 
+            name: "Organic Protein", 
+            price: "$34.50", 
+            category: "Nutrition", 
+            image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=500&q=80" 
+        }
     ];
 
     res.render('pharmacy', { 
@@ -61,12 +99,30 @@ app.get('/pharmacy', (req, res) => {
     });
 });
 
-// 5. Retreats & Experiences (The Host Ecosystem)
+// 5. Retreats & Experiences (Updated with working images)
 app.get('/retreats', (req, res) => {
     const retreats = [
-        { title: "Coorg Wellness Village", location: "Coorg, Karnataka", price: "₹25,000", image: "bg-emerald-800" },
-        { title: "Post-Op Recovery Home", location: "Mysuru, Karnataka", price: "₹45,000", image: "bg-teal-800" },
-        { title: "Gokarna Yoga Retreat", location: "Gokarna Beach", price: "₹18,000", image: "bg-cyan-800" }
+        { 
+            title: "Coorg Wellness Village", 
+            location: "Coorg, Karnataka", 
+            price: "₹25,000", 
+            host: "Dr. Rajesh",
+    image: "/images/coorg.png"
+        },
+        { 
+            title: "Post-Op Recovery Home", 
+            location: "Mysuru, Karnataka", 
+            price: "₹45,000", 
+            host: "Nurse Sarah",
+            image: "https://images.unsplash.com/photo-1512918580421-b2feee3b85a6?auto=format&fit=crop&w=800&q=80" 
+        },
+        { 
+            title: "Gokarna Yoga Retreat", 
+            location: "Gokarna Beach", 
+            price: "₹18,000", 
+            host: "Yogi Anand",
+            image: "https://images.unsplash.com/photo-1599447421405-0c323d27bc5d?auto=format&fit=crop&w=800&q=80" 
+        }
     ];
 
     res.render('retreats', { 
@@ -75,6 +131,7 @@ app.get('/retreats', (req, res) => {
         path: '/retreats' 
     });
 });
+
 
 // --- API ENDPOINTS ---
 
