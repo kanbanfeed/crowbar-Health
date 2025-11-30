@@ -3,8 +3,8 @@
         <div class="flex justify-between items-center h-20">
             
             <div class="flex items-center space-x-3">
-                <div class="relative">
-                    <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-xl">
+                <a href="/" class="relative">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-xl hover:scale-105 transition-transform">
                         <svg class="w-6 h-6 md:w-8 md:h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="10" y="4" width="4" height="16" rx="2" fill="currentColor"/>
                             <rect x="4" y="10" width="16" height="4" rx="2" fill="currentColor"/>
@@ -12,7 +12,7 @@
                             <circle cx="12" cy="8" r="1.5" fill="white" opacity="0.9"/>
                         </svg>
                     </div>
-                </div>
+                </a>
                 <div>
                     <h1 class="text-lg md:text-2xl font-bold text-slate-800">Crowbar Health</h1>
                     <p class="text-[10px] md:text-xs text-slate-500 -mt-1 font-medium">Healthcare Platform</p>
@@ -20,26 +20,39 @@
             </div>
 
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="/" class="text-slate-700 hover:text-emerald-600 transition-all font-medium">Home</a>
-                <a href="/doctors" class="text-slate-700 hover:text-emerald-600 transition-all font-medium">Find Doctors</a>
-                <a href="/pharmacy" class="text-slate-700 hover:text-emerald-600 transition-all font-medium">Pharmacy</a>
-                <a href="/retreats" class="text-slate-700 hover:text-emerald-600 transition-all font-medium">Retreats</a>
+                <a href="/" class="text-slate-700 hover:text-emerald-600 font-medium">Home</a>
+                <a href="/doctors" class="text-slate-700 hover:text-emerald-600 font-medium">Find Doctors</a>
+                <a href="/telemed" class="text-slate-700 hover:text-emerald-600 font-medium">Telemedicine</a>
+                <a href="/pharmacy" class="text-slate-700 hover:text-emerald-600 font-medium">Pharmacy</a>
+                <a href="/retreats" class="text-slate-700 hover:text-emerald-600 font-medium">Retreats</a>
             </div>
 
             <div class="hidden md:block">
-                <button class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 shadow-lg font-semibold flex items-center space-x-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                    </svg>
-                    <span>Login</span>
-                </button>
+                <a href="/login" id="nav-login-btn" class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-lg hover:from-orange-600 hover:to-red-600 transition-all shadow-lg font-semibold flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    <span>Login with Crowbar</span>
+                </a>
+
+                <div id="nav-user-profile" class="hidden items-center space-x-4 relative group">
+                    <div class="text-right">
+                        <p class="text-sm font-bold text-slate-800" id="user-name-display">User</p>
+                        <p class="text-xs text-emerald-600">Crowbar Member</p>
+                    </div>
+                    <div id="user-avatar-display" class="w-10 h-10 rounded-full border-2 border-emerald-500 bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold cursor-pointer">
+                        U
+                    </div>
+                    
+                    <div class="absolute right-0 top-8 w-48 pt-4 hidden group-hover:block transition-all">
+    <div class="bg-white rounded-xl shadow-xl border border-slate-100 p-2">
+        <a href="#" onclick="logout()" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg font-medium">Logout</a>
+    </div>
+</div>
+                </div>
             </div>
 
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-btn" class="text-slate-600 hover:text-emerald-600 p-2 focus:outline-none">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
+            <div class="md:hidden flex items-center gap-4">
+                <button id="mobile-menu-btn" class="text-slate-600 hover:text-emerald-600 p-2">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
@@ -47,23 +60,69 @@
 
     <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-t border-slate-100 shadow-xl z-40">
         <div class="flex flex-col px-4 py-6 space-y-4">
+            <div id="mobile-user-info" class="hidden bg-emerald-50 p-4 rounded-xl flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-emerald-200 flex items-center justify-center text-emerald-800 font-bold">U</div>
+                <div>
+                    <p class="font-bold text-slate-800" id="mobile-user-name">User</p>
+                    <p class="text-xs text-emerald-600">Logged In</p>
+                </div>
+            </div>
+
             <a href="/" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Home</a>
             <a href="/doctors" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Find Doctors</a>
+            <a href="/telemed" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Telemedicine</a>
             <a href="/pharmacy" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Pharmacy</a>
             <a href="/retreats" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Retreats</a>
             
-            <button class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-4 rounded-xl font-bold shadow-lg mt-4">
+            <a href="/login" id="mobile-login-link" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-4 rounded-xl font-bold shadow-lg mt-4 text-center block">
                 Login with Crowbar
+            </a>
+            
+            <button id="mobile-logout-btn" onclick="logout()" class="hidden w-full bg-red-50 text-red-600 px-6 py-4 rounded-xl font-bold mt-4 text-center">
+                Logout
             </button>
         </div>
     </div>
 </nav>
 
 <script>
+    // 1. Mobile Menu Toggle
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-
     btn.addEventListener('click', () => {
         menu.classList.toggle('hidden');
     });
+
+    // 2. Auth Logic (Check LocalStorage)
+    document.addEventListener('DOMContentLoaded', () => {
+        const userStr = localStorage.getItem('crowbar_user');
+        
+        if (userStr) {
+            const user = JSON.parse(userStr);
+            const userName = user.email ? user.email.split('@')[0] : 'User'; // Fallback name
+            const initials = userName.charAt(0).toUpperCase();
+
+            // Desktop Updates
+            document.getElementById('nav-login-btn').style.display = 'none';
+            const profile = document.getElementById('nav-user-profile');
+            profile.classList.remove('hidden');
+            profile.classList.add('flex');
+            
+            document.getElementById('user-name-display').innerText = userName;
+            document.getElementById('user-avatar-display').innerText = initials;
+
+            // Mobile Updates
+            document.getElementById('mobile-login-link').style.display = 'none';
+            document.getElementById('mobile-user-info').classList.remove('hidden');
+            document.getElementById('mobile-logout-btn').classList.remove('hidden');
+            document.getElementById('mobile-user-name').innerText = userName;
+        }
+    });
+
+    // 3. Logout Function
+    function logout() {
+        localStorage.removeItem('crowbar_session');
+        localStorage.removeItem('crowbar_user');
+        window.location.href = '/';
+    }
 </script>

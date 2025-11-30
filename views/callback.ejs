@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authenticating...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-50 flex flex-col items-center justify-center h-screen">
+
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-emerald-600 mb-4"></div>
+    <h2 class="text-xl font-bold text-slate-700">Verifying Identity...</h2>
+    <p id="status" class="text-slate-500 mt-2">Connecting to Crowbar ID</p>
+
+    <script>
+        // 1. CONFIG (From the code you shared)
+        const SB_URL = 'https://zfxnhbymlhvukeqmsyhj.supabase.co';
+        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpmeG5oYnltbGh2dWtlcW1zeWhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4MTIyMTIsImV4cCI6MjA3NzM4ODIxMn0.kKB1RsLvXJuROPlBY5bWeBzTWDGGe_UTouWkfSc7RXs';
+        const client = supabase.createClient(SB_URL, SB_KEY);
+
+        async function handleSSO() {
+            const hash = window.location.hash;
+
+            if (hash && hash.includes('access_token')) {
+                try {
+                    // Extract token from URL
+                    const params = new URLSearchParams(hash.substring(1));
+                    const accessToken = params.get('access_token');
+
+                    if (accessToken) {
+                        console.log("Token found!");
+                        
+                        // Save token to LocalStorage
+                        localStorage.setItem('crowbar_session', accessToken);
+                        
+                        // Fetch User Details using the Token
+                        const { data } = await client.auth.getUser(accessToken);
+                        
+                        if (data && data.user) {
+                            localStorage.setItem('crowbar_user', JSON.stringify(data.user));
+                        } else {
+                            // Fallback if user data fetch fails but token is valid
+                            localStorage.setItem('crowbar_user', JSON.stringify({ email: "user@crowbar.com", id: "session_user" }));
+                        }
+
+                        // Success Message & Redirect
+                        document.getElementById('status').innerText = "Success! Redirecting...";
+                        document.getElementById('status').className = "text-emerald-600 font-bold mt-2";
+                        
+                        setTimeout(() => window.location.href = '/', 500);
+                    }
+                } catch (err) {
+                    console.error("Auth failed:", err);
+                    document.getElementById('status').innerText = "Authentication Error.";
+                }
+            } else {
+                // No token found? Maybe already logged in via Supabase session
+                const { data: { session } } = await client.auth.getSession();
+                if (session) {
+                    localStorage.setItem('crowbar_session', session.access_token);
+                    localStorage.setItem('crowbar_user', JSON.stringify(session.user));
+                    window.location.href = '/';
+                } else {
+                    document.getElementById('status').innerText = "No credentials found. Redirecting to login...";
+                    setTimeout(() => window.location.href = '/login', 2000);
+                }
+            }
+        }
+
+        handleSSO();
+    </script>
+</body>
+</html>
