@@ -37,7 +37,6 @@ async function loadHealthStats() {
         setTimeout(() => animateCounter(document.getElementById('patientsHelped'), data.patientsHelped), 400);
         setTimeout(() => animateCounter(document.getElementById('appointmentsToday'), data.appointmentsToday), 600);
         setTimeout(() => animateCounter(document.getElementById('satisfactionRate'), data.satisfactionRate), 800);
-        setTimeout(() => animateCounter(document.getElementById('telemedSessions'), data.telemedSessions), 1000);
         setTimeout(() => animateCounter(document.getElementById('prescriptionsFilled'), data.prescriptionsFilled), 1200);
     } catch (error) {
         console.error('Error loading health stats:', error);
