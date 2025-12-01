@@ -21,9 +21,10 @@
 
             <div class="hidden md:flex space-x-6 items-center">
                 <a href="/" class="text-slate-700 hover:text-emerald-600 font-medium">Home</a>
-                <a href="/doctors" class="text-slate-700 hover:text-emerald-600 font-medium">Find Doctors</a>
-                <a href="/pharmacy" class="text-slate-700 hover:text-emerald-600 font-medium">Pharmacy</a>
                 <a href="/retreats" class="text-slate-700 hover:text-emerald-600 font-medium">Retreats</a>
+                
+                <a href="/doctors" class="protected-link hidden text-slate-700 hover:text-emerald-600 font-medium">Find Doctors</a>
+                <a href="/pharmacy" class="protected-link hidden text-slate-700 hover:text-emerald-600 font-medium">Pharmacy</a>
             </div>
 
             <div class="hidden md:block">
@@ -42,10 +43,11 @@
                     </div>
                     
                     <div class="absolute right-0 top-8 w-48 pt-4 hidden group-hover:block transition-all">
-    <div class="bg-white rounded-xl shadow-xl border border-slate-100 p-2">
-        <a href="#" onclick="logout()" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg font-medium">Logout</a>
-    </div>
-</div>
+                        <div class="bg-white rounded-xl shadow-xl border border-slate-100 p-2">
+                            <a href="#" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50 rounded-lg">My Profile</a>
+                            <a href="#" onclick="logout()" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg font-medium">Logout</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -68,9 +70,10 @@
             </div>
 
             <a href="/" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Home</a>
-            <a href="/doctors" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Find Doctors</a>
-            <a href="/pharmacy" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Pharmacy</a>
             <a href="/retreats" class="text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Retreats</a>
+            
+            <a href="/doctors" class="protected-link hidden text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Find Doctors</a>
+            <a href="/pharmacy" class="protected-link hidden text-lg font-medium text-slate-700 hover:text-emerald-600 bg-slate-50 p-3 rounded-lg">Pharmacy</a>
             
             <a href="/login" id="mobile-login-link" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-4 rounded-xl font-bold shadow-lg mt-4 text-center block">
                 Login with Crowbar
@@ -97,10 +100,16 @@
         
         if (userStr) {
             const user = JSON.parse(userStr);
-            const userName = user.email ? user.email.split('@')[0] : 'User'; // Fallback name
+            const userName = user.email ? user.email.split('@')[0] : 'User'; 
             const initials = userName.charAt(0).toUpperCase();
 
-            // Desktop Updates
+            // A. Show Protected Menu Items (Desktop & Mobile)
+            const protectedLinks = document.querySelectorAll('.protected-link');
+            protectedLinks.forEach(link => {
+                link.classList.remove('hidden'); // Remove 'hidden' class to show them
+            });
+
+            // B. Desktop Profile Updates
             document.getElementById('nav-login-btn').style.display = 'none';
             const profile = document.getElementById('nav-user-profile');
             profile.classList.remove('hidden');
@@ -109,7 +118,7 @@
             document.getElementById('user-name-display').innerText = userName;
             document.getElementById('user-avatar-display').innerText = initials;
 
-            // Mobile Updates
+            // C. Mobile Profile Updates
             document.getElementById('mobile-login-link').style.display = 'none';
             document.getElementById('mobile-user-info').classList.remove('hidden');
             document.getElementById('mobile-logout-btn').classList.remove('hidden');
@@ -121,6 +130,7 @@
     function logout() {
         localStorage.removeItem('crowbar_session');
         localStorage.removeItem('crowbar_user');
+        sessionStorage.removeItem('return_to'); // Clear return path
         window.location.href = '/';
     }
 </script>
