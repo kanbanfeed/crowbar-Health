@@ -1,0 +1,16 @@
+<script>
+    // 1. Check if user exists in browser storage
+    const user = localStorage.getItem('crowbar_user');
+
+    if (!user) {
+        // 2. User is NOT logged in.
+        // Save the page they were trying to visit so we can send them back later
+        sessionStorage.setItem('return_to', window.location.pathname);
+
+        // 3. Stop the rest of the page from showing (optional visual fix)
+        document.body.style.display = 'none';
+
+        // 4. Redirect to login immediately
+        window.location.href = '/login';
+    }
+</script>

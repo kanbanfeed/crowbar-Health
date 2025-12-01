@@ -57,10 +57,10 @@ app.get('/doctors', (req, res) => {
 
 app.get('/pharmacy', (req, res) => {
     const products = [
-        { id: 1, name: "Immunity Booster Pack", price: "$29.99", category: "Wellness", image: "https://images.unsplash.com/photo-1615485500704-8e99099928b3?auto=format&fit=crop&w=500&q=80" },
+        { id: 1, name: "Immunity Booster Pack", price: "$29.99", category: "Wellness", image: "/images/immunity.png" },
         { id: 2, name: "First Aid Kit Pro", price: "$45.50", category: "Essentials", image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=500&q=80" },
-        { id: 3, name: "Digital Thermometer", price: "$12.99", category: "Devices", image: "https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=500&q=80" },
-        { id: 4, name: "Daily Multivitamins", price: "$18.00", category: "Wellness", image: "https://images.unsplash.com/photo-1577401239170-897942555fb3?auto=format&fit=crop&w=500&q=80" },
+        { id: 3, name: "Digital Thermometer", price: "$12.99", category: "Devices", image: "/images/thermometer.png" },
+        { id: 4, name: "Daily Multivitamins", price: "$18.00", category: "Wellness", image: "/images/multi.png" },
         { id: 5, name: "BP Monitor", price: "$89.99", category: "Devices", image: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?auto=format&fit=crop&w=500&q=80" },
         { id: 6, name: "Organic Protein", price: "$34.50", category: "Nutrition", image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=500&q=80" }
     ];

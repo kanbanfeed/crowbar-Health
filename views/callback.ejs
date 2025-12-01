@@ -47,7 +47,18 @@
                         document.getElementById('status').innerText = "Success! Redirecting...";
                         document.getElementById('status').className = "text-emerald-600 font-bold mt-2";
                         
-                        setTimeout(() => window.location.href = '/', 500);
+                        
+
+                        const returnTo = sessionStorage.getItem('return_to');
+                        if (returnTo) {
+                            // Clear it so it doesn't get used again
+                            sessionStorage.removeItem('return_to');
+                            // Go to the specific page (e.g., /doctors)
+                            setTimeout(() => window.location.href = returnTo, 500);
+                        } else {
+                            // Default to Home if no specific page was requested
+                            setTimeout(() => window.location.href = '/', 100);
+                        }
                     }
                 } catch (err) {
                     console.error("Auth failed:", err);
