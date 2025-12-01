@@ -6,46 +6,41 @@
     <%- include('partials/auth-guard') %>
     <%- include('partials/navbar') %>
 
-    <div class="relative bg-[url('https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center py-32 text-center text-white">
-        <div class="absolute inset-0 bg-slate-900/60 z-0"></div>
+    <div class="retreats-hero">
+        <div class="hero-overlay"></div>
         
-        <div class="max-w-4xl mx-auto px-4 relative z-10">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Heal. Recover. Reconnect.</h1>
-            <p class="text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl mx-auto">
+        <div class="hero-content-wrapper">
+            <h1 class="retreats-title">Heal. Recover. Reconnect.</h1>
+            <p class="retreats-subtitle">
                 Curated wellness experiences and medical recovery stays hosted by certified experts in nature.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="/coming-soon" class="bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transform hover:scale-105">
-                    Explore Stays
-                </a>
-                <a href="/coming-soon" class="inline-block bg-white/10 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition backdrop-blur-sm border border-white/30">
-                    Become a Host
-                </a>
+            <div class="hero-btn-group">
+                <button class="btn-explore">Explore Stays</button>
+                <a href="/coming-soon" class="btn-host-outline">Become a Host</a>
             </div>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 py-16">
-        <h2 class="text-3xl font-bold text-slate-800 mb-8">Featured Experiences</h2>
+    <div class="retreats-grid-section">
+        <h2 class="section-label">Featured Experiences</h2>
 
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="retreats-grid">
             <% retreats.forEach(function(item) { %>
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer hover:-translate-y-2 transition duration-300">
-                    <div class="h-64 relative overflow-hidden bg-slate-200">
-                        <img src="<%= item.image %>" alt="<%= item.title %>" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-emerald-800">
-                            VERIFIED HOST
-                        </div>
+                <div class="retreat-card">
+                    <div class="retreat-img-box">
+                        <img src="<%= item.image %>" alt="<%= item.title %>" class="retreat-img">
+                        <div class="badge-verified">VERIFIED HOST</div>
                     </div>
                     
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-slate-800"><%= item.title %></h3>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">4.9 ★</span>
+                    <div class="retreat-info">
+                        <div class="retreat-header">
+                            <h3 class="retreat-name"><%= item.title %></h3>
+                            <span class="rating-pill">4.9 ★</span>
                         </div>
-                        <p class="text-slate-500 text-sm mb-4">Hosted by <%= item.host %> • <%= item.location %></p>
-                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                            <span class="text-lg font-bold text-emerald-600"><%= item.price %> <span class="text-xs text-slate-400 font-normal">/ week</span></span>
+                        <p class="host-text">Hosted by <%= item.host %> • <%= item.location %></p>
+                        <div class="retreat-footer">
+                            <span class="price-text"><%= item.price %> <span class="price-sub">/ week</span></span>
+                            <button class="view-btn">View Details</button>
                         </div>
                     </div>
                 </div>
@@ -53,43 +48,39 @@
         </div>
     </div>
 
-    <div class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-16">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+    <div class="host-cta-section">
+        <div class="host-grid">
             <div>
-                <h2 class="text-3xl font-bold text-slate-800 mb-6">Become a Crowbar Host</h2>
-                <p class="text-slate-600 mb-8 text-lg">
+                <h2 class="host-title">Become a Crowbar Host</h2>
+                <p class="host-desc">
                     Do you have a facility suitable for post-op recovery or wellness retreats? Partner with us to provide care-focused hospitality.
                 </p>
-                <ul class="space-y-4 mb-8">
-                    <li class="flex items-center text-slate-700">
-                        <svg class="w-6 h-6 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <ul class="host-list">
+                    <li class="host-list-item">
+                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         Verified Patient Leads
                     </li>
-                    <li class="flex items-center text-slate-700">
-                        <svg class="w-6 h-6 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <li class="host-list-item">
+                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         Medical Protocol Training
                     </li>
-                    <li class="flex items-center text-slate-700">
-                        <svg class="w-6 h-6 text-emerald-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <li class="host-list-item">
+                        <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         Guaranteed Payments
                     </li>
                 </ul>
-                <a href="/coming-soon" class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-emerald-700 transition shadow-lg shadow-emerald-200">
-                    Start Hosting
-                </a>
+                <a href="/coming-soon" class="btn-start-hosting">Start Hosting</a>
             </div>
             
-            <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-                <div class="flex items-center mb-6">
-                    <div class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 font-bold text-xl mr-4">
-                        R
-                    </div>
+            <div class="host-testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">R</div>
                     <div>
-                        <h4 class="font-bold text-slate-800">Rajesh Kumar</h4>
-                        <p class="text-emerald-600 text-sm">Super Host • Coorg</p>
+                        <h4 class="host-name">Rajesh Kumar</h4>
+                        <p class="host-badge">Super Host • Coorg</p>
                     </div>
                 </div>
-                <p class="text-slate-600 italic leading-relaxed">
+                <p class="testimonial-text">
                     "Converting my homestay into a Crowbar Wellness Retreat has been amazing. The guests are respectful, and knowing I'm helping them recover feels great."
                 </p>
             </div>
