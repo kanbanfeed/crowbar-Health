@@ -71,15 +71,14 @@ app.get('/retreats', (req, res) => {
     const retreats = [
         { title: "Coorg Wellness Village", location: "Coorg, Karnataka", price: "₹25,000", host: "Dr. Rajesh", image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80" },
         { title: "Post-Op Recovery Home", location: "Mysuru, Karnataka", price: "₹45,000", host: "Nurse Sarah", image: "https://images.unsplash.com/photo-1512918580421-b2feee3b85a6?auto=format&fit=crop&w=800&q=80" },
-        { title: "Gokarna Yoga Retreat", location: "Gokarna Beach", price: "₹18,000", host: "Yogi Anand", image: "https://images.unsplash.com/photo-1599447421405-0c323d27bc5d?auto=format&fit=crop&w=800&q=80" }
+        { title: "Gokarna Yoga Retreat", location: "Gokarna Beach", price: "₹18,000", host: "Yogi Anand", image: "/images/gokarna.png" }
     ];
     res.render('retreats', { pageTitle: 'Wellness Retreats', retreats: retreats });
 });
 
-app.get('/telemed', (req, res) => {
-    res.render('telemed', { pageTitle: 'Virtual Waiting Room' });
+app.get('/coming-soon', (req, res) => {
+    res.render('placeholder', { pageTitle: 'Coming Soon' });
 });
-
 // API
 app.get('/api/health-stats', (req, res) => {
   res.json({

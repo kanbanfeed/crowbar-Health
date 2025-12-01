@@ -3,9 +3,10 @@
 <%- include('partials/head') %>
 <body class="font-sans antialiased text-slate-800 bg-slate-50">
 
+    <%- include('partials/auth-guard') %>
     <%- include('partials/navbar') %>
 
-   <div class="relative bg-[url('https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center py-32 text-center text-white">
+    <div class="relative bg-[url('https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center py-32 text-center text-white">
         <div class="absolute inset-0 bg-slate-900/60 z-0"></div>
         
         <div class="max-w-4xl mx-auto px-4 relative z-10">
@@ -14,12 +15,12 @@
                 Curated wellness experiences and medical recovery stays hosted by certified experts in nature.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button class="bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transform hover:scale-105">
+                <a href="/coming-soon" class="bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-600 transition shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50 transform hover:scale-105">
                     Explore Stays
-                </button>
-                <button class="bg-white/10 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition backdrop-blur-sm border border-white/30">
+                </a>
+                <a href="/coming-soon" class="inline-block bg-white/10 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/20 transition backdrop-blur-sm border border-white/30">
                     Become a Host
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -28,66 +29,31 @@
         <h2 class="text-3xl font-bold text-slate-800 mb-8">Featured Experiences</h2>
 
         <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer hover:-translate-y-2 transition duration-300">
-                <div class="h-64 bg-emerald-800 relative overflow-hidden">
-                    <img src="/images/coorg.png" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-emerald-800">
-                        VERIFIED HOST
+            <% retreats.forEach(function(item) { %>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer hover:-translate-y-2 transition duration-300">
+                    <div class="h-64 relative overflow-hidden bg-slate-200">
+                        <img src="<%= item.image %>" alt="<%= item.title %>" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-emerald-800">
+                            VERIFIED HOST
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-slate-800"><%= item.title %></h3>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">4.9 ★</span>
+                        </div>
+                        <p class="text-slate-500 text-sm mb-4">Hosted by <%= item.host %> • <%= item.location %></p>
+                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
+                            <span class="text-lg font-bold text-emerald-600"><%= item.price %> <span class="text-xs text-slate-400 font-normal">/ week</span></span>
+                        </div>
                     </div>
                 </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-800">Coorg Wellness Village</h3>
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">4.9 ★</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-4">Hosted by Dr. Rajesh • Karnataka</p>
-                    <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-lg font-bold text-emerald-600">₹25,000 <span class="text-xs text-slate-400 font-normal">/ week</span></span>
-                        <button class="text-emerald-600 font-bold text-sm hover:underline">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer hover:-translate-y-2 transition duration-300">
-                <div class="h-64 bg-teal-800 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-emerald-800">
-                        MEDICAL STAY
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-800">Post-Op Recovery Home</h3>
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">4.8 ★</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-4">Hosted by Nurse Sarah • Mysuru</p>
-                    <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-lg font-bold text-emerald-600">₹45,000 <span class="text-xs text-slate-400 font-normal">/ month</span></span>
-                        <button class="text-emerald-600 font-bold text-sm hover:underline">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer hover:-translate-y-2 transition duration-300">
-                <div class="h-64 bg-cyan-800 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-800">Gokarna Yoga Retreat</h3>
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded">5.0 ★</span>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-4">Hosted by Yogi Anand • Gokarna</p>
-                    <div class="pt-4 border-t border-slate-100 flex justify-between items-center">
-                        <span class="text-lg font-bold text-emerald-600">₹18,000 <span class="text-xs text-slate-400 font-normal">/ 3 days</span></span>
-                        <button class="text-emerald-600 font-bold text-sm hover:underline">View Details</button>
-                    </div>
-                </div>
-            </div>
+            <% }); %>
         </div>
     </div>
 
-   <div class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-16">
+    <div class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-16">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
             <div>
                 <h2 class="text-3xl font-bold text-slate-800 mb-6">Become a Crowbar Host</h2>
@@ -108,9 +74,9 @@
                         Guaranteed Payments
                     </li>
                 </ul>
-                <button class="bg-emerald-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-emerald-700 transition shadow-lg shadow-emerald-200">
+                <a href="/coming-soon" class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-emerald-700 transition shadow-lg shadow-emerald-200">
                     Start Hosting
-                </button>
+                </a>
             </div>
             
             <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100">

@@ -209,10 +209,81 @@
 .bg-services {
     background: linear-gradient(to bottom, #ffffff, #f8fafc, #ffffff);
 }
+/* =========================================
+   DOCTORS SECTION (Updated to Crowbar Ventures Purple)
+   ========================================= */
 
 .bg-doctors {
-    background: linear-gradient(to bottom, #af9beb, #2c3c56, #9f83e4);
+    /* Deep Purple/Violet Gradient */
+    background: linear-gradient(180deg, #1e1b4b 0%, #4c1d95 50%, #6d28d9 100%);
     color: white;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Section Title & Subtitle */
+.bg-doctors .section-title {
+    color: white;
+}
+
+.bg-doctors .section-subtitle {
+    color: #e9d5ff; /* Light Violet text */
+}
+
+/* Doctor Cards - Glassmorphism on Purple */
+.doc-card {
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1.5rem;
+    
+    /* Transparent Glass Effect */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    
+    transition: transform 0.3s, background 0.3s;
+}
+
+.doc-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Text inside the card */
+.doc-card h3 {
+    color: white;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.doc-card p {
+    color: #ddd6fe; /* Very light purple for role/desc */
+    font-size: 0.9rem;
+}
+
+/* Star Rating */
+.doc-card .text-slate-400 {
+    color: #cbd5e1 !important; /* Make rating numbers visible */
+}
+
+/* Avatar Circle */
+.doc-avatar {
+    width: 8rem; height: 8rem;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem auto;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    /* Teal/Cyan gradient for avatar to contrast with Purple background */
+    background: linear-gradient(135deg, #2dd4bf, #06b6d4); 
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border: 4px solid rgba(255, 255, 255, 0.1);
 }
 
 .section-header {
@@ -347,6 +418,11 @@ body {
    ========================================= */
 
 /* The main green background animation */
+@/* =========================================
+   BACKGROUNDS & GRADIENTS (Updated to Crowbar Ventures Style)
+   ========================================= */
+
+/* The main Violet-White background animation */
 @keyframes gradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -354,7 +430,8 @@ body {
 }
 
 .gradient-bg {
-    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 25%, #d1fae5 50%, #a7f3d0 75%, #6ee7b7 100%);
+    /* Changed to: White -> Very Pale Violet -> Soft Blue-Grey */
+    background: linear-gradient(135deg, #ffffff 0%, #fdf4ff 25%, #f5f3ff 50%, #eff6ff 75%, #ffffff 100%);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     position: relative;
@@ -364,10 +441,39 @@ body {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(5, 150, 105, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
+    /* Static Blobs: Soft Violet and Blue instead of Green */
+    background: radial-gradient(circle at 20% 50%, rgba(167, 139, 250, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
     pointer-events: none;
 }
+
+/* =========================================
+   PARTICLES & BUBBLES (Updated to Purple/Blue)
+   ========================================= */
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    /* Changed to Purple */
+    background: rgba(139, 92, 246, 0.3); 
+    border-radius: 50%;
+    animation: float 15s infinite;
+}
+
+@keyframes bubbleFloat {
+    0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-100px) translateX(100px) scale(1); opacity: 0; }
+}
+
 
 /* =========================================
    ANIMATIONS
@@ -519,12 +625,12 @@ body {
 .bubble {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(5, 150, 105, 0.4), rgba(20, 184, 166, 0.3));
+    background: radial-gradient(circle, rgba(145, 154, 151, 0.4), rgba(166, 208, 203, 0.3));
     backdrop-filter: blur(10px);
     border: 2px solid rgba(5, 150, 105, 0.2);
-    animation: bubbleFloat 20s infinite;
+    animation: bubbleFloat 30s infinite;
     pointer-events: none;
-    box-shadow: 0 8px 32px rgba(5, 150, 105, 0.2);
+    box-shadow: 0 8px 32px rgba(154, 183, 174, 0.2);
 }
 
 /* =========================================

@@ -30,11 +30,11 @@
     <div class="max-w-7xl mx-auto px-4 py-8">
         
         <div class="category-container scrollbar-hide">
-            <button class="category-btn active">All Products</button>
-            <button class="category-btn inactive">Prescription Meds</button>
-            <button class="category-btn inactive">Wellness</button>
-            <button class="category-btn inactive">Baby Care</button>
-            <button class="category-btn inactive">Devices</button>
+            <button class="category-btn active" onclick="filterProducts('all', this)">All Products</button>
+            <button class="category-btn inactive" onclick="filterProducts('Wellness', this)">Wellness</button>
+            <button class="category-btn inactive" onclick="filterProducts('Essentials', this)">Essentials</button>
+            <button class="category-btn inactive" onclick="filterProducts('Devices', this)">Devices</button>
+            <button class="category-btn inactive" onclick="filterProducts('Nutrition', this)">Nutrition</button>
         </div>
 
         <div class="product-grid">
@@ -48,7 +48,7 @@
             </div>
 
             <% products.forEach(function(product) { %>
-                <div class="product-card">
+                <div class="product-card" data-category="<%= product.category %>">
                     <div class="product-image-container">
                         <img src="<%= product.image %>" alt="<%= product.name %>" class="product-img">
                         <button class="quick-add-btn">
@@ -70,5 +70,32 @@
     </div>
 
     <%- include('partials/footer') %>
+
+    <script>
+        function filterProducts(category, btnElement) {
+            // 1. Update Button Styles
+            // Reset all buttons to inactive
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('inactive');
+            });
+            // Set clicked button to active
+            btnElement.classList.remove('inactive');
+            btnElement.classList.add('active');
+
+            // 2. Filter Cards
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                // Show if 'all' is selected OR matches category
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
