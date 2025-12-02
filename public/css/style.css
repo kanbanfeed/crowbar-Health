@@ -1566,3 +1566,24 @@ body {
 .host-name { font-weight: 700; color: #1e293b; }
 .host-badge { color: #059669; font-size: 0.875rem; }
 .testimonial-text { color: #475569; font-style: italic; line-height: 1.6; }
+
+/* =========================================
+   BUTTON LINK FIXES
+   ========================================= */
+
+/* Ensures the Explore button acts like a button, not text */
+.btn-explore {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Ensures the View Details link looks right */
+.view-btn {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.view-btn:hover {
+    text-decoration: underline;
+}

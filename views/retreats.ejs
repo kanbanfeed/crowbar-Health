@@ -15,7 +15,7 @@
                 Curated wellness experiences and medical recovery stays hosted by certified experts in nature.
             </p>
             <div class="hero-btn-group">
-                <button class="btn-explore">Explore Stays</button>
+                <a href="/coming-soon" class="btn-explore">Explore Stays</a>
                 <a href="/coming-soon" class="btn-host-outline">Become a Host</a>
             </div>
         </div>
@@ -26,7 +26,7 @@
 
         <div class="retreats-grid">
             <% retreats.forEach(function(item) { %>
-                <div class="retreat-card">
+                <div class="retreat-card" onclick="window.location.href='/coming-soon'">
                     <div class="retreat-img-box">
                         <img src="<%= item.image %>" alt="<%= item.title %>" class="retreat-img">
                         <div class="badge-verified">VERIFIED HOST</div>
@@ -40,7 +40,7 @@
                         <p class="host-text">Hosted by <%= item.host %> • <%= item.location %></p>
                         <div class="retreat-footer">
                             <span class="price-text"><%= item.price %> <span class="price-sub">/ week</span></span>
-                            <button class="view-btn">View Details</button>
+                            <a href="/coming-soon" class="view-btn">View Details</a>
                         </div>
                     </div>
                 </div>
